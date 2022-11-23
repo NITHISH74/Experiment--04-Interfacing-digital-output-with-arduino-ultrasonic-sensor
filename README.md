@@ -1,9 +1,9 @@
-# EXPERIMENT-NO--05-Distance measurement using Ultrasonic sensor
+# EXPERIMENT-NO--04-Distance measurement using Ultrasonic sensor
 
 ## AIM: 
 To interface an ultrasonic pair and measure the distance in centimeters , calculate the error
  
-### COMPONENTS REQUIRED:
+## COMPONENTS REQUIRED:
 1.	ultrasonic sensor module HC-SR04
 2.	1 KΩ resistor 
 3.	Arduino Uno 
@@ -11,7 +11,7 @@ To interface an ultrasonic pair and measure the distance in centimeters , calcul
 5.	Connecting wires 
 
 
-### THEORY: 
+## THEORY: 
 The HC-SR04 ultrasonic sensor uses SONAR to determine the distance of an object just like the bats do. It offers excellent non-contact range detection with high accuracy and stable readings in an easy-to-use package from 2 cm to 400 cm or 1” to 13 feet.
 
 The operation is not affected by sunlight or black material, although acoustically, soft materials like cloth can be difficult to detect. It comes complete with ultrasonic transmitter and receiver module.
@@ -34,14 +34,14 @@ The time between the transmission and reception of the signal allows us to calcu
 distance to an object = ((speed of sound in the air)*time)/2
 speed of sound in the air at 20ºC (68ºF) = 343m/s
 
-### FIGURE 01 CIRCUIT OF INTERFACING ULTRASONIC SENSOR 
+#### FIGURE 01 CIRCUIT OF INTERFACING ULTRASONIC SENSOR 
 
 
 ![image](https://user-images.githubusercontent.com/36288975/166430594-5adb4ca9-5a42-4781-a7e6-7236b3766a85.png)
 
 
 
-### PROCEDURE:
+## PROCEDURE:
 1.	Connect the circuit as per the circuit diagram 
 2.	Connect the board to your computer via the USB cable.
 3.	If needed, install the drivers.
@@ -54,39 +54,54 @@ speed of sound in the air at 20ºC (68ºF) = 343m/s
 10.	Plot the graph for the output voltage vs the resistance 
 
 
-### PROGRAM 
+## PROGRAM 
+```
+#define echoPin 9
+#define trigPin 10
 
+long duration;
+int distance;
 
+void setup()
+{
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  Serial.print("DISTANCE: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+}
+```
 
+## Distance vs measurement table 
 
+![image](https://user-images.githubusercontent.com/94164665/203462381-68c1d30d-4a58-4383-8e76-4ff54c49b892.png)
 
-
-### Distance vs measurement table 
-
-			
- 
-			
-			
-			
-
-![image](https://user-images.githubusercontent.com/36288975/190135379-52ebacd5-ccd5-460f-a4cd-4d0ad1d9b179.png)
-
-			
-			
-			
-			
 			
 			Average error = sum/ number of readings 
- 
+                        Average error=0.76 
 
+## Output:
+### Before simulation:
+![image](https://user-images.githubusercontent.com/94164665/203461434-285cf264-1ac7-44c7-9900-a23b78c7eb29.png)
+### After simulation:
+![image](https://user-images.githubusercontent.com/94164665/203461555-d06ed229-b203-4b06-9c54-3a8a6be01f8b.png)
+### Serial monitor :
+![image](https://user-images.githubusercontent.com/94164665/203461667-c69532cc-968a-47c3-a765-e4c405a4a233.png)
 
+## RESULTS:
+Thus the distance the value is measured in "CM" using ultrasonic - sensor .
 
-
-
-
-
-
-### RESULTS
 
 
 
